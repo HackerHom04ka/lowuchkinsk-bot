@@ -33,7 +33,7 @@ def bot():
                 # Только в личных сообщениях
                 if peer_id == from_id:
                     if text.lower() == 'привет' or payload['button'] == '2':
-                        session.send_message(peer_id, text="ну хай.", keyboard={})
+                        session.send_message(peer_id, text="ну хай.", keyboard={'buttons': []})
                 # Только в беседах
                 elif peer_id != from_id:
                     pass
