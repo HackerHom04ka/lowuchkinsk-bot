@@ -34,3 +34,5 @@ def bot():
                 # Только в беседах
                 elif peer_id != from_id:
                     pass
+
+                return 'ok'
