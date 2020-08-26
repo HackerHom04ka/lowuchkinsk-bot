@@ -23,16 +23,16 @@ def bot():
             if data['type'] == 'message_new':
                 message = data['object']['message'] # Объект сообщения
                 text = message['text'] # Текст сообщения
-                if message['payload']:
-                    payload = json.dumps(message['payload']) # Полезная нагрузка
-                else:
+                try:
+                    payload = json.loads(message['payload']) # Полезная нагрузка
+                except KeyError:
                     payload = {}
                 peer_id = message['peer_id'] # Откудо пришло
                 from_id = message['from_id'] # Кто прислал
 
                 # Только в личных сообщениях
                 if peer_id == from_id:
-                    if(text.lower() == 'привет' or payload['button'] == 2):
+                    if text.lower() == 'привет' or payload['button'] == '2':
                         session.send_message(peer_id, text="ну хай.")
                 # Только в беседах
                 elif peer_id != from_id:
