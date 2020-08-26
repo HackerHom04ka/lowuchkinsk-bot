@@ -1,5 +1,5 @@
 from config import app, db, group_config
-from models import Person
+#from models import Person
 from flask import request
 import json
 from vk_api import vk
