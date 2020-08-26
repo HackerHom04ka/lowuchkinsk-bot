@@ -22,6 +22,7 @@ class vk(object):
             keyboard = json.dumps(keyboard)
 
         requests.post('https://api.vk.com/method/messages.send', params={'access_token': self.token, 'v': self.v, 'random_id': 0, 'peer_id': peer_id, 'message': text, 'attachment': attachment, 'keyboard': keyboard})
+        return 'ok'
     
     def inputIMG(self, photo, peer_id):
         res1 = requests.post('https://api.vk.com/method/photos.getMessagesUploadServer', params={'access_token': self.token, 'v': self.v, 'random_id': 0, 'peer_id': peer_id}).json()

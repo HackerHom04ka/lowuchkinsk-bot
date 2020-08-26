@@ -23,7 +23,10 @@ def bot():
             if data['type'] == 'message_new':
                 message = data['object']['message'] # Объект сообщения
                 text = message['text'] # Текст сообщения
-                payload = json.dumps(message['payload']) # Полезная нагрузка 
+                if message['payload']:
+                    payload = json.dumps(message['payload']) # Полезная нагрузка
+                else:
+                    payload = {}
                 peer_id = message['peer_id'] # Откудо пришло
                 from_id = message['from_id'] # Кто прислал
 
@@ -34,5 +37,3 @@ def bot():
                 # Только в беседах
                 elif peer_id != from_id:
                     pass
-
-                return 'ok'
