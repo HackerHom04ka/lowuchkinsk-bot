@@ -179,16 +179,20 @@ def bot():
                             from keyboards import keyboardChangeAccess
                             User = Passport.query.filter_by(vk_id=from_id).first()
                             User.Img = img_url
+                            db.session.commit()
                             session.send_message(peer_id, 'Принято! Ссылка на фото:\n\n' + img_url, keyboard=json.dumps(keyboardChangeAccess))
                         except:
                             session.send_message(peer_id, 'Произошла ошибка!')
                     if text.lower() == 'паспорт показать' or text.lower() == 'показать паспорт' or payload['command'] == 'show_passport':
-                        from passport import createPassport
-                        from keyboards import keyboardPassport
-                        User = Passport.query.filter_by(vk_id=from_id).first()
-                        img = createPassport(User.Name, User.Surname, User.Middlename, User.Gender, User.Data_of_Birth, User.Place_of_Birth, User.Place_of_residence, User.Nation, User.Sexual_Orientation, Photo=str(User.Img))
-                        img_id = session.inputIMGMSG(img, peer_id)
-                        session.send_message(peer_id, text='Вот ваш паспорт!\nСчёт - ' + str(User.Count) + 'Ŀ !\nVk_ID - ' + str(User.vk_id) + '\nUserID - ' + str(User.id), attachment=img_id, keyboard=json.dumps(keyboardPassport))
+                        try:
+                            from passport import createPassport
+                            from keyboards import keyboardPassport
+                            User = Passport.query.filter_by(vk_id=from_id).first()
+                            img = createPassport(User.Name, User.Surname, User.Middlename, User.Gender, User.Data_of_Birth, User.Place_of_Birth, User.Place_of_residence, User.Nation, User.Sexual_Orientation, Photo=str(User.Img))
+                            img_id = session.inputIMGMSG(img, peer_id)
+                            session.send_message(peer_id, text='Вот ваш паспорт!\nСчёт - ' + str(User.Count) + 'Ŀ !\nVk_ID - ' + str(User.vk_id) + '\nUserID - ' + str(User.id), attachment=img_id, keyboard=json.dumps(keyboardPassport))
+                        except:
+                            session.send_message(peer_id, 'Произошла ошибка!')
                 elif peer_id != from_id:
                     pass
 
