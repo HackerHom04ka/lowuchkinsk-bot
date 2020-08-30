@@ -177,7 +177,7 @@ def bot():
                             session.send_message(peer_id, 'Фото не было найдено.')
                         try:
                             from keyboards import keyboardChangeAccess
-                            User = Passport.query.filter_by(vk_id=from_id)
+                            User = Passport.query.filter_by(vk_id=from_id).first()
                             User.Img = img_url
                             session.send_message(peer_id, 'Принято! Ссылка на фото:\n\n' + img_url, keyboard=json.dumps(keyboardChangeAccess))
                         except:
