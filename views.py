@@ -31,7 +31,7 @@ def bot():
                 command_text1 = text.lower().split(' ')[0]
 
                 if Passport.query.filter_by(vk_id=from_id).first() == None:
-                    session.send_message(peer_id, 'Был найден [id' + peer_id + '|незарегистрированный пользователь]!')
+                    session.send_message(peer_id, 'Был найден [id' + str(from_id) + '|незарегистрированный пользователь]!')
                     try:
                         img = session.getUser(from_id)['photo_max']
                         newUser = Passport(vk_id=from_id, Img=img)
