@@ -185,7 +185,7 @@ def bot():
                         from passport import createPassport, ImageOpenURL
                         from keyboards import keyboardPassport
                         User = Passport.query.filter_by(vk_id=from_id).first()
-                        img = createPassport(User.Name, User.Surname, User.Middlename, User.Gender, User.Data_of_Birth, User.Place_of_Birth, User.Place_of_residence, User.Nation, User.Sexsual_Orientation, Photo=User.Img)
+                        img = createPassport(User.Name, User.Surname, User.Middlename, User.Gender, User.Data_of_Birth, User.Place_of_Birth, User.Place_of_residence, User.Nation, User.Sexual_Orientation, Photo=User.Img)
                         img_id = session.inputIMGMSG(img, peer_id)
                         session.send_message(peer_id, text='Вот ваш паспорт!\nСчёт - ' + str(User.Count) + 'Ŀ !\nVk_ID - ' + str(User.vk_id) + '\nUserID - ' + str(User.id), attachment=img_id, keyboard=json.dumps(keyboardPassport))
                 elif peer_id != from_id:
