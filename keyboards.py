@@ -30,3 +30,18 @@ keyboardChangeAccess = {
             ]
         ]
 }
+keyboardPassport = {
+    'inline': True,
+    'buttons': [
+            [
+                {
+                    'action': {
+                        'type': 'text',
+                        'label': '🖊 | Поменять данные',
+                        'payload': json.dumps({'command': 'create_passport'})
+                    },
+                    'color': 'positive'
+                }
+            ]
+        ]
+}

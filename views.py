@@ -45,7 +45,7 @@ def bot():
                 if peer_id == from_id:
                     if text.lower() == 'start' or text.lower() == 'начать' or payload['command'] == 'start':
                         from keyboards import keyboardStart
-                        session.send_message(peer_id, 'Здравия, товарищь для начала, вам нужен паспорт, в сообщении появится кнопка', keyboard=json.dumps(keyboardStart))
+                        session.send_message(peer_id, 'Здравия, товарищ для начала, вам нужен паспорт, в сообщении появится кнопка', keyboard=json.dumps(keyboardStart))
                     if text.lower() == 'passport create' or text.lower() == 'паспорт создать' or payload['command'] == 'create_passport':
                         session.send_message(peer_id, 'Что бы редактировать данные в паспорте, есть данные команды:\n"Фамилия (Фамилия)"\n"Имя (Имя)"\n"Отчество (Отчество)"\n"Пол (Пол)"\n"Дата_рождения (Дата рождения)"\n"Место рождения (Место рождения)"\n"Место проживания (Место жительства)"\n"Национальность (Национальность)"\n"Сексуальная ориентация (Сексуальная ориентация)"\n"Фото" и отправить своё фото\nНадеемся, что понятно объяснили!')
                     if command_text1 == 'имя':
@@ -178,9 +178,16 @@ def bot():
                         try:
                             User = Passport.query.filter_by(vk_id=from_id)
                             User.Img = img_url
-                            session.send_message(pуer_id, 'Принято! Ссылка на фото:\n\n' + img_url)
+                            session.send_message(peer_id, 'Принято! Ссылка на фото:\n\n' + img_url)
                         except:
                             session.send_message(peer_id, 'Произошла ошибка!')
+                    if text.lower() == 'паспорт показать' or text.lower() == 'показать паспорт' or payload['command'] == 'show_passport':
+                        from passport import createPassport, ImageOpenURL
+                        from keyboards import keyboardPassport
+                        User = Passport.query.filter_by(vk_id=from_id).first()
+                        img = createPassport(User.Name, User.Surname, User.Middlename, User.Gender, User.Data_of_Birth, User.Place_of_Birth, User.Place_of_residence, User.Nation, User.Sexsual_Orientation, Photo=User.Img)
+                        img_id = session.inputIMGMSG(img, peer_id)
+                        session.send_message(peer_id, text='Вот ваш паспорт!\nСчёт - ' + str(User.Count) + 'Ŀ !\nVk_ID - ' + str(User.vk_id) + '\nUserID - ' + str(User.id), attachment=img_id, keyboard=json.dumps(keyboardPassport))
                 elif peer_id != from_id:
                     pass
 
