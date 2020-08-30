@@ -4,7 +4,7 @@ import requests
 import os, sys
 
 def ImageOpenURL(url):
-    response = requests.get(url, stream=True).raw
+    response = requests.get(url, stream=True).content
     img = Image.open(response)
     return img
 
