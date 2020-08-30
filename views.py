@@ -24,8 +24,8 @@ def bot():
                 text = message['text'] # Текст сообщения
                 try:
                     payload = json.loads(message['payload']) # Полезная нагрузка
-                except KeyError:
-                    payload = {}
+                except:
+                    payload = {'command': ''}
                 peer_id = message['peer_id'] # Откуда пришло
                 from_id = message['from_id'] # Кто прислал
                 command_text1 = text.lower().split(' ')[0]
