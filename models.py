@@ -13,7 +13,7 @@ class Person(db.Model):
     Place_of_residence = db.Column(db.String(80), default='-')
     Nation = db.Column(db.String(80), default='-')
     Sexual_Orientation = db.Column(db.String(80), default='-')
-    Img = db.Column(db.Text, default='')
+    Img = db.Column(db.Text, default='https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png')
 
     Count = db.Column(db.Integer, default=0)
 
