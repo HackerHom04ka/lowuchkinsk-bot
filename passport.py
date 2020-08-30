@@ -4,9 +4,8 @@ import requests
 import os, sys
 
 def ImageOpenURL(url):
-    response = requests.get(url, stream=True).content
-    img = Image.open(response)
-    return img
+    response = requests.get(url, stream=True).raw
+    return response
 
 def createPassport(Name, Surname, Middlename, Gender, Data_of_Birth, Place_of_Birth, Place_of_residence, Nation, Sexsual_Orientation, Photo=None):
     # Image Open
@@ -25,7 +24,7 @@ def createPassport(Name, Surname, Middlename, Gender, Data_of_Birth, Place_of_Bi
     shablondraw.text((1100, 1990), Nation, (0, 0, 0), font=font)
     shablondraw.text((1170, 2090), Sexsual_Orientation, (0, 0, 0), font=font)
     # Add Photo
-    Photo = ImageOpenURL(Photo)
+    Photo = Image.open(ImageOpenURL(Photo))
     Photo = Photo.resize((657, 845))
     shablon.paste(Photo, (120, 1319))
     # Return Image
