@@ -4,7 +4,7 @@ import requests
 import os, sys
 
 def ImageOpenURL(url):
-    response = requests.get(url, stream=True).raw
+    response = requests.get(url).content
     return response
 
 def createPassport(Name, Surname, Middlename, Gender, Data_of_Birth, Place_of_Birth, Place_of_residence, Nation, Sexsual_Orientation, Photo=None):
